@@ -1,2 +1,2 @@
-# javascript-revision-es6
-Codes used during JS ES6 revision course by offered DIO
+# course NodeJS
+Codes used during NodeJs revision course by offered RocketSeat
