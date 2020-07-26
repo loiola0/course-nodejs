@@ -1,11 +1,14 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const requireDir = require('require-dir');
+const cors = require('cors');
 
 
 //Iniciando com o app.
 const app = express();
 
+app.use(express.json());
+app.use(cors());
 
 //Iniciando o DB
 mongoose.connect('mongodb://localhost:27017/nodeapi',{useNewUrlParser: true,useUnifiedTopology: true });
@@ -13,21 +16,10 @@ mongoose.connect('mongodb://localhost:27017/nodeapi',{useNewUrlParser: true,useU
 
 requireDir('./src/models');
 
-const Product = mongoose.model('Product');
 
-//Primeira Rota
-app.get('/',(req,res)=>{
-    //req: simboliza a requisição ao servidor.(parâmetros,corpo da requisição,cabeçalhos,autenticação, etc...).
-    //res: resposta ao usuário.
+//Rotas
+app.use('/api',require('./src/routes'));
 
-    Product.create({
-        title: "React Native",
-        description: "Build app mobile with React",
-        url: "https://github.com/facebook/react-native",
-    });
-
-    return res.send('Hello Jesus');
-});
 
 
 app.listen(3001);
